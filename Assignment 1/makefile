@@ -1,0 +1,27 @@
+CC = g++
+DEBUG = -g
+CFLAGS = -Wall -c $(DEBUG)
+LDFLAGS = -Wall $(DEBUG)
+
+SERVER_SOURCES = server.cpp TCPServerSocket.cpp UDPSocket.cpp
+SERVER_OBJECTS = $(SERVER_SOURCES:.cpp=.o)
+SERVER_EXECUTABLE = server
+
+CLIENT_SOURCES = client.cpp TCPClientSocket.cpp UDPSocket.cpp
+CLIENT_OBJECTS= $(CLIENT_SOURCES:.cpp=.o)
+CLIENT_EXECUTABLE= client
+
+
+all: $(SERVER_SOURCES) $(CLIENT_SOURCES) $(SERVER_EXECUTABLE) $(CLIENT_EXECUTABLE)
+	
+$(SERVER_EXECUTABLE): $(SERVER_OBJECTS) 
+	$(CC) $(LDFLAGS) $(SERVER_OBJECTS) -o $@
+
+$(CLIENT_EXECUTABLE): $(CLIENT_OBJECTS) 
+	$(CC) $(LDFLAGS) $(CLIENT_OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm -rf *o $(SERVER_EXECUTABLE). $(CLIENT_EXECUTABLE).

@@ -1,0 +1,8 @@
+#ifndef TCPSOCKET_H
+#define TCPSOCKET_H
+
+#include "Socket.h"
+
+Socket* TCPServerSocketCreate();
+
+#endif //TCPSOCKET_H

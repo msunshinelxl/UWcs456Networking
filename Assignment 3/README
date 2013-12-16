@@ -1,0 +1,21 @@
+This software is written for CS 456 - Computer Networking, Fall 2013, Assignment 3. 
+It is totally written by me, Nagendra Boddula, 20344521.
+
+How to compile:
+This can be built only on linux environment with g++ compiler.
+To build the program, just navigate to the directory and type 'make'.
+It should create one programs named 'router'.
+
+How to run the programs:
+In order to run the sofware, always launch the emulator before launching the 5 routers.
+1. Run the emulator with ip address of hosts which has routers and the port on which to run the emulator
+	./emulator <ipAddress of host> <port number of emulator>
+2. Run 5 routers on one host
+	./ router <routerId> <ip Address of emulator> <port of emulator> <port of router>
+
+Which machines was the code written on?
+The code was written on and tested by using ssh into linux.student.cs.uwaterloo.ca.
+
+Compiler version info?
+g++ compiler was used to build and link the programs. The version used was 4.4.5. 
+

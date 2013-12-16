@@ -1,0 +1,38 @@
+#include "TCPSocket.h"
+
+class TCPServerSocket : public Socket {
+public:
+	TCPServerSocket(int port);
+	int open();
+	int read(unsigned char * const buf, int size);
+	int write(unsigned char * const buf, int size);
+	int close();
+};
+
+
+TCPServerSocket::TCPServerSocket(int port) {
+	mPort = port;
+
+	memset(&mRemoteAddr, 0, sizeof(sockaddr_in));
+	mRemoteAddr.sin_family = IF_ANET;
+	mRemoteAddr.sin_addr.s_addr = htonl(IADDR_ANY);
+	mRemoteAddr.sin_port = htons(port); 
+}
+
+int TCPSocket::open() {
+	mSocket = socket(AF_INET, SOCK_STREAM, 0);
+
+	int ret = bind(mSocket, mRemoteAddr, sizeof(sockaddr_in));
+	ASSERT(ret == 0);
+	ret = listen(mSocket, 10);
+	ASSERT(ret == 0);
+	return ret;
+}
+
+int TCPServerSocket::read() {
+	int ret = listen(mSocket, 10);
+	
+	
+
+}
+

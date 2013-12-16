@@ -1,0 +1,59 @@
+#include "UDPSocket.h"
+
+class UDPSocket : public Socket {
+private:
+    unsigned long mRemoteIp;
+    
+public:
+	UDPSocket(unsigned long remoteIp, int port);
+	int open();
+	int read(unsigned char * const buf, int size);
+	int write(unsigned char * const buf, int size);
+	int close();
+};
+
+UDPSocket::UDPSocket(unsigned long remoteIp, int port) {
+    mPort = port;
+    mRemoteIp = remoteIp;
+
+	memset(&mRemoteAddr, 0, sizeof(sockaddr_in));
+	mRemoteAddr.sin_family = AF_INET;
+	mRemoteAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	mRemoteAddr.sin_port = htons(port);
+}
+
+int UDPSocket::open() {
+	mSocket = socket(AF_INET, SOCK_STREAM, 0);
+	ASSERT(mSocket > 0);
+	
+	int ret = bind(mSocket, (sockaddr *) &mRemoteAddr, sizeof(sockaddr_in));
+	ASSERT(ret == 0);
+	
+	return ret;
+}
+
+
+int UDPSocket::read(unsigned char * const buf, int size) {
+    sockaddr_in remoteAddr;
+    int remoteAddrSize = sizeof(remoteAddr);
+    
+    int length = recvfrom(mSocket, buf, size, 0, (sockaddr *) &remoteAddr, 
+                                                &remoteAddrSize);
+                                                
+    return length;                                                
+}
+
+int UDPSocket::write(unsigned char * const buf, int size) {
+    sockaddr_in remoteAddr;
+    remoteAddr.sin_family = AF_INET;
+    remoteAddr.sin_addr.s_addr = htonl(mRemoteIp);
+    remoteAddr.sin_port = htons(mPort);
+    
+    int length = sendto(mSocket, buf, size, NULL, (sockaddr *) &remoteAddr, sizeof(remoteAddr));
+    return length;
+}
+
+int UDPSocket::close() {
+    close(mSocket);
+}
+

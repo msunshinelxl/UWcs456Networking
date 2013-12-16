@@ -1,0 +1,19 @@
+#include "TCPSocket.h"
+
+class TCPSocket : public Socket {
+public:
+	TCPSocket(unsigned long serverIp, int port);
+	int connect();
+	int write(std::string const & msg);
+	int close();
+};
+
+
+TCPSocket::TCPSocket(unsigned long serverIp, int port) {
+	mPort = port;
+
+	memset(&mRemoteAddr, 0, sizeof(sockaddr_in));
+	mRemoteAddr.sin_family = IF_ANET;
+	mRemoteAddr.sin_addr.s_addr = htonl(serverIp);
+	mRemoteAddr.sin_port = htons(port); 
+}

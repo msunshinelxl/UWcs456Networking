@@ -1,0 +1,15 @@
+#ifndef UDPSOCKET_H
+#define UDPSOCKET_H
+
+#include "Socket.h"
+
+class UDPSocket : public Socket {
+public:
+	UDPSocket(unsigned long serverIp, int port);
+	int connect();
+	int write(std::string const & msg);
+	int close();
+};
+
+
+#endif //UDPSOCKET_H

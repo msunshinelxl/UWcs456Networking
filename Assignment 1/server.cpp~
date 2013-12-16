@@ -1,0 +1,15 @@
+#include "TCPServer.h"
+
+const int SERVER_TCP_PORT 49996;
+const int SERVER_UDP_PORT 49998;
+
+int main() {
+    TCPServer server;
+    
+    int ret = server.initialize(SERVER_TCP_PORT);
+    ASSERT(ret == 0);
+    
+    server.processRequests();
+
+    return 0;
+}

@@ -1,0 +1,16 @@
+#ifndef TCP_SEVER_H
+#define TCP_SERVER_H
+
+#include "Socket.h"
+
+class TCPServer {
+private:
+	int    	    mPort;
+	SOCKET	    mSocket;
+
+public:
+    int initialize(int port);
+    void processRequests();
+};
+
+#endif //TCP_SERVER_H

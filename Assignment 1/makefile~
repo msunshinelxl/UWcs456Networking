@@ -1,0 +1,26 @@
+#CC will specify g++ compiler. CFLAGS is the options to the compiler.
+CC=g++
+CFLAGS=-c -Wall
+
+all: server client
+
+server: server.o TCPServer.o
+	$(CC) server.o TCPServer.o -o server
+	
+client: client.o UDPSocket.o	
+
+server.o: server.cpp
+	$(CC) $(CFLAGS) server.cpp
+
+TCPServer.o: TCPServer.cpp
+	$(CC) $(CFLAGS) TCPServer.cpp
+	
+client.o: client.cpp
+	$(CC) $(CFLAGS) client.cpp
+
+UDPSocket.o: UDPSocket.cpp
+	$(CC) $(CFLAGS) UDPSocket.cpp
+	
+
+clean:
+	rm -rf *o server. client.

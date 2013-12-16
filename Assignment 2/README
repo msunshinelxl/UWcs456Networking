@@ -1,0 +1,33 @@
+This software is written for CS 456 - Computer Networking, Fall 2013, Assignment 2. 
+It is totally written by me, Nagendra Boddula, 20344521.
+
+How to compile:
+This can be built only on linux environment with g++ compiler.
+To build the program, just navigate to the directory and type 'make'.
+It should create two programs named 'sender' and 'receiver'.
+Note: When running on a new computer always run "make -B".
+Note: The sender and receiver use same UDP port to send and receive data & ACKs.
+
+How to run the programs:
+In order to run the sofware, always launch emulator, receiver and sender in the corresponding order.
+1. Launching the emulator.
+	./nEmulator <UDP Port forward direction> <ipAddress of receiver> <UDP port of receiver to receive data>
+				<UDP Port backward direction> <ipAddress of sender> <UDP port of sender to receive ACKs> 
+				<max delay of packet in ms> <probability of packet discard> <verbose>
+	example usage:
+	./nEmulator 49998 127.0.0.1 11235 49999 127.0.0.1 11234 2 0.2 1
+
+2. Sender can be launched by just typing these commands.
+	./sender <ipAddr of emulator> <UDP port of emulator in forward direction> <UDP port of sender to send data / recv acks> <fileName>
+	./sender 127.0.0.1 49998 11234 test.jpg
+
+2. To launch receiver, use following arguments:
+	./receiver <ipAddr of emulator> <UDP port of emulator in backward direction> <UDP Port of receiver to recv data / send ACKS> <fileName of recv file>
+	./receiver 127.0.0.1 49999 11235 recv_test.jpg
+
+Which machines was the code written on?
+The code was written on and tested by using ssh into linux.student.cs.uwaterloo.ca.
+
+Compiler version info?
+g++ compiler was used to build and link the programs. The version used was 4.4.5. 
+

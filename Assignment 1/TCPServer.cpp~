@@ -1,0 +1,40 @@
+#include "TCPServer.h"
+
+int TCPServer::initialize(int port) {
+    mPort = port;
+
+	memset(&mRemoteAddr, 0, sizeof(sockaddr_in));
+	mRemoteAddr.sin_family = AF_INET;
+	mRemoteAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	mRemoteAddr.sin_port = htons(port);
+	
+	mSocket = socket(AF_INET, SOCK_STREAM, 0);
+	ASSERT(mSocket > 0);
+
+    int ret = bind(mSocket, (sockaddr *) &mRemoteAddr, sizeof(sockaddr_in));
+	ASSERT(ret == 0);
+	ret = listen(mSocket, 10);
+	ASSERT(ret == 0);
+	
+	return 0;
+}
+
+void TCPServer::processRequests() {	
+	
+	unsigned char buf[1024];
+
+	while(true) {
+		SOCKET connectionSocket = accept(mSocket, (sockaddr *) NULL, NULL);
+		int readBytes = read(mSocket, buf, sizeof(buf));
+		LOG("Server Received Request: %s", buf);
+		
+		//DO processing here
+		
+		int writeBytes = write(mSocket, buf, readBytes);
+		ASSERT(readBytes == writeBytes);
+		
+		close(connectionSocket);		
+	}
+}
+
+

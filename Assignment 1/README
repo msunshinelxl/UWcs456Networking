@@ -1,0 +1,28 @@
+This software is written for CS 456 - Computer Networking, Fall 2013, Assignment 1. 
+It is totally written by me, Nagendra Boddula, 20344521.
+
+How to compile:
+This can be built only on linux environment with g++ compiler.
+To build the program, just navigate to the directory and type 'make'.
+It should create two programs named 'server' and 'client'.
+
+How to run the programs:
+In order to run the sofware, always launch server before client.
+1. Server can be launched by just typing these commands.
+	./server
+	./server &		if you want to launch the process but continue executing more commands on terminal.
+
+2. To launch client, it needs 3 parameters: the ipaddress of server, the server port, and a random string.
+The following three examples provide the working syntax. By default, the server is launched on port 11234.
+	./client localhost 11234 'I love computer networking!!'
+	./client 127.0.0.1 11234 'I love computer networking!!'
+	./client ipAddress serverPort 'string in single quotes'
+
+Note: The string should be encapsulated in single quotes.
+
+Which machines was the code written on?
+The code was written on and tested by using ssh into linux.student.cs.uwaterloo.ca.
+
+Compiler version info?
+g++ compiler was used to build and link the programs. The version used was 4.4.5. 
+
